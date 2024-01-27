@@ -2,12 +2,12 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class PetTypes extends Model {
+  class PetType extends Model {
     static associate (models) {
-      PetTypes.hasMany(models.Pet, { foreignKey: 'petTypeId' });
+      PetType.hasMany(models.Pet, { foreignKey: 'petTypeId' });
     }
   }
-  PetTypes.init(
+  PetType.init(
     {
       type: {
         type: DataTypes.STRING(64),
@@ -16,9 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'PetTypes',
+      modelName: 'PetType',
       underscored: true,
     }
   );
-  return PetTypes;
+
+  return PetType;
 };

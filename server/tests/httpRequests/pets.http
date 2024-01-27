@@ -1,0 +1,36 @@
+GET http://localhost:5000/api/pettypes
+
+### 201
+
+POST http://localhost:5000/api/pets
+Content-Type: application/json
+
+{
+    "name": "Liza",
+    "owner": "Test Testovych",
+    "ownerContacts": "+380123456789",
+    "description": "big black dog",
+    "city": "Kyiv",
+    "petTypeId": 1,
+    "lostDate": "2024-01-20"
+}
+ 
+### 422
+
+POST http://localhost:5000/api/pets
+Content-Type: application/json
+
+{
+    "name": "Liza",
+    "owner": "Test Testovych",
+    "ownerContacts": "+380123456789",
+    "description": "big black dog",
+    "city": "Kyiv",
+    "petTypeId": 1,
+    "lostDate": "2024-01-20"
+}
+
+
+###
+
+GET http://localhost:5000/api/pets
