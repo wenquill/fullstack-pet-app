@@ -1,13 +1,16 @@
 'use strict';
 const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class PetTypes extends Model {
-    static associate (models) {}
+    static associate (models) {
+      PetTypes.hasMany(models.Pet, { foreignKey: 'petTypeId' });
+    }
   }
   PetTypes.init(
     {
-      type: { 
-        type: DataTypes.STRING(64), 
+      type: {
+        type: DataTypes.STRING(64),
         allowNull: false,
       },
     },
