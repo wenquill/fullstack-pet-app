@@ -1,6 +1,8 @@
 module.exports.createPetType = async (req, res, next) => {};
 
-module.exports.getPetTypes = async (req, res, next) => {};
+module.exports.getPetTypes = async (req, res, next) => {
+  res.status(200).send('oks');
+};
 
 module.exports.getPetTypeById = async (req, res, next) => {};
 
