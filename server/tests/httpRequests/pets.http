@@ -6,9 +6,9 @@ POST http://localhost:5000/api/pets
 Content-Type: application/json
 
 {
-    "name": "     Liza",
+    "name": "Liza",
     "owner": "Test Testovych",
-    "ownerContacts": "+380123456789",
+    "ownerContacts": "+380123456",
     "description": "big black dog",
     "city": "Kyiv",
     "petTypeId": 1,
@@ -21,13 +21,13 @@ POST http://localhost:5000/api/pets
 Content-Type: application/json
 
 {
-    "name": "Liza",
-    "owner": "Test Testovych",
-    "ownerContacts": "+380123456789",
-    "description": "big black dog",
-    "city": "Kyiv",
-    "petTypeId": 1,
-    "lostDate": "2024-01-20"
+    "name": "Anny",
+    "owner": "Test1 Testovych1",
+    "ownerContacts": "+380123456782",
+    "description": "little white cat",
+    "city": "Dnipro",
+    "petTypeId": 2,
+    "lostDate": "2024-01-23"
 }
 
 ###

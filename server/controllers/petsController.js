@@ -1,10 +1,9 @@
 const createHttpError = require('http-errors');
-const _ = require('lodash');
 const { Pet } = require('./../db/models');
+const { OMIT } = require('../utils/constants/functions');
 
 module.exports.createPet = async (req, res, next) => {
   const { body } = req;
-  console.log(body);
 
   try {
     const createdPet = await Pet.create(body);
@@ -13,7 +12,7 @@ module.exports.createPet = async (req, res, next) => {
       return next(createHttpError(400, 'Something went wrong...'));
     }
 
-    const preparedPet = _.omit(createdPet.get(), ['createdAt', 'updatedAt']);
+    const preparedPet = OMIT(createdPet.get())
 
     res.status(201).send(preparedPet);
   } catch (err) {
