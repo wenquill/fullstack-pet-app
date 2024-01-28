@@ -52,6 +52,11 @@ export const getPetsThunk = createAsyncThunk(
 const petsSlice = createSlice({
   name: PET_SLICE_NAME,
   initialState,
+  reducers: {
+    changePetTypeFilter: (state, { payload }) => {
+      state.filter.petType = payload;
+    },
+  },
 
   extraReducers: builder => {
     // * GET pettypes
@@ -98,6 +103,8 @@ const petsSlice = createSlice({
   },
 });
 
-const { reducer } = petsSlice;
+const { reducer, actions } = petsSlice;
+
+export const { changePetTypeFilter } = actions;
 
 export default reducer;
