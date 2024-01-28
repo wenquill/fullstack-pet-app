@@ -6,7 +6,7 @@ POST http://localhost:5000/api/pets
 Content-Type: application/json
 
 {
-    "name": "Liza",
+    "name": "     Liza",
     "owner": "Test Testovych",
     "ownerContacts": "+380123456789",
     "description": "big black dog",
@@ -29,7 +29,6 @@ Content-Type: application/json
     "petTypeId": 1,
     "lostDate": "2024-01-20"
 }
-
 
 ###
 
