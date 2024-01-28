@@ -1,9 +1,12 @@
-import React from 'react'
+import PetForm from '../../components/PetForm';
 
-function CreatePetPage() {
+function CreatePetPage () {
   return (
-    <div>CreatePetPage</div>
-  )
+    <div>
+      <h1>CreatePetPage</h1>
+      <PetForm></PetForm>
+    </div>
+  );
 }
 
-export default CreatePetPage
+export default CreatePetPage;
