@@ -1,7 +1,10 @@
 import React from 'react';
+import PetsList from '../../components/PetsList';
 
 function PetsListPage () {
-  return <div>PetsListPage</div>;
+  return <div>
+    <PetsList/>
+  </div>;
 }
 
 export default PetsListPage;

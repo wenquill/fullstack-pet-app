@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { connect } from 'react-redux';
 import { createPetThunk, getTypesThunk } from '../../store/slices/petsSlice';
 import { useEffect } from 'react';
@@ -19,14 +19,13 @@ function PetForm ({ petTypes, getPetTypes, createPet }) {
   };
 
   const handleSubmit = (values, formikBag) => {
-    console.log(values);
     createPet(values);
     formikBag.resetForm();
   };
 
   useEffect(() => {
     getPetTypes();
-  }, []);
+  }, [getPetTypes]);
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>

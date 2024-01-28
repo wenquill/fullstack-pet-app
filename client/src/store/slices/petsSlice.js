@@ -8,6 +8,9 @@ const initialState = {
   petTypes: [],
   isFetching: false,
   error: null,
+  filter: {
+    petType: '',
+  },
 };
 
 export const getTypesThunk = createAsyncThunk(
@@ -34,12 +37,23 @@ export const createPetThunk = createAsyncThunk(
   }
 );
 
+export const getPetsThunk = createAsyncThunk(
+  `${PET_SLICE_NAME}/get/pets`,
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await API.getPets();
+      return data;
+    } catch (err) {
+      return rejectWithValue({ errors: err.response.data });
+    }
+  }
+);
+
 const petsSlice = createSlice({
   name: PET_SLICE_NAME,
   initialState,
 
   extraReducers: builder => {
-    
     // * GET pettypes
     builder.addCase(getTypesThunk.fulfilled, (state, { payload }) => {
       state.petTypes = [...payload];
@@ -62,6 +76,22 @@ const petsSlice = createSlice({
     });
 
     builder.addCase(createPetThunk.rejected, (state, { payload }) => {
+      state.error = payload;
+      state.isFetching = false;
+    });
+
+    // * GET pets
+    builder.addCase(getPetsThunk.pending, state => {
+      state.isFetching = true;
+      state.error = null;
+    });
+
+    builder.addCase(getPetsThunk.fulfilled, (state, { payload }) => {
+      state.pets = [...payload];
+      state.error = null;
+    });
+
+    builder.addCase(getPetsThunk.rejected, (state, { payload }) => {
       state.error = payload;
       state.isFetching = false;
     });
