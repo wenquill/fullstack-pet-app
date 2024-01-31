@@ -24,18 +24,20 @@ module.exports.createPet = async (req, res, next) => {
 module.exports.getPets = async (req, res, next) => {
   const queries = req.query;
   const page = queries.page || 1;
-  const pageSize = queries.pageSize || 10;
+  const results = queries.results || 10;
 
   const whereConditions = {};
 
   // Додамо тільки параметри з непорожнім значенням до об'єкту whereConditions
   Object.keys(queries)
-    .filter(key => key !== 'page' && key !== 'pageSize')
+    .filter(key => key !== 'page' && key !== 'results')
     .forEach(key => {
       if (queries[key]) {
         whereConditions[key] = queries[key];
       }
     });
+
+  const offset = (page - 1) * results;
 
   try {
     const foundTypes = await Pet.findAll({
@@ -44,6 +46,8 @@ module.exports.getPets = async (req, res, next) => {
         exclude: ['createdAt', 'updatedAt'],
       },
       where: whereConditions,
+      limit: parseInt(results),
+      offset: parseInt(offset),
     });
 
     if (!foundTypes) {

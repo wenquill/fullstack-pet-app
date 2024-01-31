@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
+  changePageFilter,
   changePetTypeFilter,
+  changeResultsFilter,
   deletePetThunk,
   getPetsThunk,
   getTypesThunk,
 } from '../../store/slices/petsSlice';
+import Pagination from '../Pagination';
 
 function PetsList ({
   pets,
@@ -17,6 +20,8 @@ function PetsList ({
   getPetTypes,
   changePetType,
   deletePet,
+  changePage,
+  changeResults,
 }) {
   useEffect(() => {
     getPetTypes();
@@ -54,6 +59,8 @@ function PetsList ({
           </li>
         ))}
       </ul>
+
+      <Pagination filter={filter} pets={pets} changePage={changePage} />
     </>
   );
 }
@@ -65,6 +72,8 @@ const mapDispatchToProps = dispatch => ({
   getPetTypes: () => dispatch(getTypesThunk()),
   changePetType: value => dispatch(changePetTypeFilter(value)),
   deletePet: id => dispatch(deletePetThunk(id)),
+  changePage: value => dispatch(changePageFilter(value)),
+  changeResults: value => dispatch(changeResultsFilter(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PetsList);
