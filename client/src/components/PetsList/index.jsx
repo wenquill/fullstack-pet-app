@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   changePetTypeFilter,
+  deletePetThunk,
   getPetsThunk,
   getTypesThunk,
 } from '../../store/slices/petsSlice';
@@ -15,6 +16,7 @@ function PetsList ({
   getPets,
   getPetTypes,
   changePetType,
+  deletePet,
 }) {
   useEffect(() => {
     getPetTypes();
@@ -30,7 +32,7 @@ function PetsList ({
       <section>
         <span>Types: </span>
         {petTypes.map(type => (
-          <label>
+          <label key={type.id}>
             <input
               type='radio'
               name='petType'
@@ -46,6 +48,7 @@ function PetsList ({
           <li key={pet.id}>
             {pet.name}, {pet.owner}, {pet.ownerContacts},{' '}
             {petTypes?.find(t => t.id === pet.petTypeId)?.type}
+            <button onClick={() => deletePet(pet?.id)}>X</button>
           </li>
         ))}
       </ul>
@@ -59,6 +62,7 @@ const mapDispatchToProps = dispatch => ({
   getPets: () => dispatch(getPetsThunk()),
   getPetTypes: () => dispatch(getTypesThunk()),
   changePetType: value => dispatch(changePetTypeFilter(value)),
+  deletePet: id => dispatch(deletePetThunk(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PetsList);
