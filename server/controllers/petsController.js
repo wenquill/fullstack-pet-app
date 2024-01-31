@@ -1,6 +1,7 @@
 const createHttpError = require('http-errors');
 const { Pet } = require('./../db/models');
 const { OMIT } = require('../utils/constants/functions');
+const { Op } = require('sequelize');
 
 module.exports.createPet = async (req, res, next) => {
   const { body } = req;
@@ -21,12 +22,28 @@ module.exports.createPet = async (req, res, next) => {
 };
 
 module.exports.getPets = async (req, res, next) => {
+  const queries = req.query;
+  const page = queries.page || 1;
+  const pageSize = queries.pageSize || 10;
+
+  const whereConditions = {};
+
+  // Додамо тільки параметри з непорожнім значенням до об'єкту whereConditions
+  Object.keys(queries)
+    .filter(key => key !== 'page' && key !== 'pageSize')
+    .forEach(key => {
+      if (queries[key]) {
+        whereConditions[key] = queries[key];
+      }
+    });
+
   try {
     const foundTypes = await Pet.findAll({
       raw: true,
       attributes: {
         exclude: ['createdAt', 'updatedAt'],
       },
+      where: whereConditions,
     });
 
     if (!foundTypes) {

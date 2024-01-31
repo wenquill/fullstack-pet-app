@@ -23,8 +23,8 @@ function PetsList ({
   }, []);
 
   useEffect(() => {
-    getPets();
-  }, [filter.petType]);
+    getPets(filter);
+  }, [filter]);
 
   // TODO error, isFetching and create another conmponent with pet card
   return (
@@ -34,21 +34,23 @@ function PetsList ({
         {petTypes.map(type => (
           <label key={type.id}>
             <input
+              checked={type.id === filter.petTypeId}
               type='radio'
-              name='petType'
+              name='petTypeId'
               value={type.id}
               onChange={() => changePetType(type.id)}
             />
             {type.type}
           </label>
         ))}
+        <button onClick={() => changePetType(null)}>reset filters</button>
       </section>
       <ul>
         {pets?.map(pet => (
           <li key={pet.id}>
             {pet.name}, {pet.owner}, {pet.ownerContacts},{' '}
             {petTypes?.find(t => t.id === pet.petTypeId)?.type}
-            <button onClick={() => deletePet(pet?.id)}>X</button>
+            <button onClick={() => deletePet(pet.id)}>X</button>
           </li>
         ))}
       </ul>
@@ -59,7 +61,7 @@ function PetsList ({
 const mapStateToProps = ({ petsData }) => petsData;
 
 const mapDispatchToProps = dispatch => ({
-  getPets: () => dispatch(getPetsThunk()),
+  getPets: data => dispatch(getPetsThunk(data)),
   getPetTypes: () => dispatch(getTypesThunk()),
   changePetType: value => dispatch(changePetTypeFilter(value)),
   deletePet: id => dispatch(deletePetThunk(id)),
