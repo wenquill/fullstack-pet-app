@@ -15,6 +15,9 @@ import styles from './PetsList.module.scss';
 import FilterSection from '../FilterSection';
 import { CITIES } from '../../utils/constants';
 import Button from '../Button';
+import Loading from '../pageState/Loading';
+import Error from '../pageState/Error';
+import NoContent from '../pageState/NoContent';
 
 function PetsList ({
   pets,
@@ -53,6 +56,8 @@ function PetsList ({
     handleChangeCity(value);
   };
 
+  console.log(error);
+
   // TODO error, isFetching and create another conmponent with pet card
   return (
     <>
@@ -89,18 +94,22 @@ function PetsList ({
           <Pagination filter={filter} pets={pets} changePage={changePage} />
         </div>
         <ul className={styles.petsList}>
-          {isFetching && <div>loading...</div>}
-          {error && <div>ERROR!!!!</div>}
-          {pets?.map(pet => (
-            <SinglePetCard
-              key={pet.id}
-              pet={pet}
-              petTypes={petTypes}
-              deletePet={deletePet}
-              updatePet={updatePet}
-            />
-          ))}
-          {pets?.length === 0 && <div>no results ):</div>}
+          {isFetching && <Loading isFetching={isFetching} />}
+          {error && <Error />}
+          {!isFetching &&
+            !error &&
+            pets?.map(pet => (
+              <SinglePetCard
+                key={pet.id}
+                pet={pet}
+                petTypes={petTypes}
+                deletePet={deletePet}
+                updatePet={updatePet}
+              />
+            ))}
+          {!isFetching && !error && pets?.length === 0 && (
+            <NoContent/>
+          )}
         </ul>
       </section>
     </>

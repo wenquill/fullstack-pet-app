@@ -143,7 +143,6 @@ const petsSlice = createSlice({
 
     // * PATCH pet
     builder.addCase(updatePetsThunk.pending, state => {
-      state.isFetching = true;
       state.error = null;
     });
 
@@ -153,13 +152,10 @@ const petsSlice = createSlice({
         ...state.pets[updatedPetIndex],
         ...payload,
       };
-
-      state.isFetching = false;
     });
 
     builder.addCase(updatePetsThunk.rejected, (state, { payload }) => {
       state.error = payload;
-      state.isFetching = false;
     });
 
     // * DELETE pet
