@@ -1,7 +1,10 @@
 import Button from '../Button';
 import styles from './SinglePetCard.module.scss';
+import image from './default.jpeg';
 
 function SinglePetCard ({ pet, petTypes, deletePet, updatePet }) {
+  const { name, owner, ownerContacts, isFound, id, city, petTypeId } = pet;
+
   const isFoundHandler = (id, checked) => {
     updatePet(id, { isFound: checked });
   };
@@ -9,28 +12,22 @@ function SinglePetCard ({ pet, petTypes, deletePet, updatePet }) {
   return (
     <li className={styles.card}>
       <div className={styles.imageContainer}>
-        <img
-          className={styles.image}
-          src='https://images.pexels.com/photos/825949/pexels-photo-825949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-          alt='pet image'
-        />
+        <img className={styles.image} src={image} alt={name} />
       </div>
-      <h3>{pet.name}</h3>
+      <h3>{name}</h3>
       <p>
-        {pet.owner}, {pet.ownerContacts}
+        {owner}, {ownerContacts}
       </p>
-      <p>City: {pet.city}</p>
-      {`Type: ${petTypes?.find(t => t.id === pet.petTypeId)?.type}`}
+      <p>City: {city}</p>
+      {`Type: ${petTypes?.find(t => t.id === petTypeId)?.type}`}
 
       <div className={styles.buttons}>
         <label className={styles.label}>
           <input
             className={styles.checkbox}
             type='checkbox'
-            checked={pet.isFound}
-            onChange={({ target: { checked } }) =>
-              isFoundHandler(pet.id, checked)
-            }
+            checked={isFound}
+            onChange={({ target: { checked } }) => isFoundHandler(id, checked)}
           />
           <span>pet is found</span>
         </label>
@@ -38,7 +35,7 @@ function SinglePetCard ({ pet, petTypes, deletePet, updatePet }) {
         <Button
           className={styles.removeBtn}
           onClickHandler={deletePet}
-          handlerCondition={pet.id}
+          handlerCondition={id}
           label='Remove this pet'
         />
       </div>

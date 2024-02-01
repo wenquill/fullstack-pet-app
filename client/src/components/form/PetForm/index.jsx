@@ -27,15 +27,13 @@ function PetForm ({ petTypes, getPetTypes, createPet }) {
   };
 
   const handleSubmit = (values, formikBag) => {
-    console.log('fedfefe', values);
     createPet(values);
-
     formikBag.resetForm();
   };
 
   useEffect(() => {
     getPetTypes();
-  }, []);
+  }, [getPetTypes]);
 
   return (
     <div className={styles.cont}>

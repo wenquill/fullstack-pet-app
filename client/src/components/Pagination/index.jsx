@@ -2,19 +2,20 @@ import Button from '../Button';
 import styles from './Pagination.module.scss';
 
 function Pagination ({ filter, pets, changePage }) {
+  const { page, results } = filter;
   return (
     <div className={styles.cont}>
       <Button
         onClickHandler={changePage}
-        handlerCondition={filter.page - 1}
-        disabledCondition={filter.page === 1}
+        handlerCondition={page - 1}
+        disabledCondition={page === 1}
         label={`${'<'} back`}
       />
 
       <Button
         onClickHandler={changePage}
-        handlerCondition={filter.page + 1}
-        disabledCondition={pets.length < filter.results}
+        handlerCondition={page + 1}
+        disabledCondition={pets.length < results}
         label={`forward ${'>'}`}
       />
     </div>

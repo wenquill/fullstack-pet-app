@@ -37,11 +37,11 @@ function PetsList ({
 }) {
   useEffect(() => {
     getPetTypes();
-  }, []);
+  }, [getPetTypes]);
 
   useEffect(() => {
     getPets(filter);
-  }, [filter]);
+  }, [filter, getPets]);
 
   const handleChange = (value, callback) => {
     callback(value);

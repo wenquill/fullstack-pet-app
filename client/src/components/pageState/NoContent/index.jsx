@@ -1,4 +1,3 @@
-import { ImFilesEmpty } from 'react-icons/im';
 import styles from './../PageState.module.scss';
 import image from './noContent.png';
 

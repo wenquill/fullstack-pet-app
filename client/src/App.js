@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CreatePetPage from './pages/CreatePetPage';
 import PetsListPage from './pages/PetsListPage';
@@ -9,23 +8,23 @@ import NotFound from './pages/404';
 function App () {
   return (
     <Router>
-        <Header />
-        <main className='container'>
-          <Switch>
-            <Route exact path='/'>
-              <Home />
-            </Route>
-            <Route path='/pets'>
-              <PetsListPage />
-            </Route>
-            <Route path='/pet/create'>
-              <CreatePetPage />
-            </Route>
-            <Route path='/*'>
-              <NotFound />
-            </Route>
-          </Switch>
-        </main>
+      <Header />
+      <main className='container'>
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route path='/pets'>
+            <PetsListPage />
+          </Route>
+          <Route path='/pet/create'>
+            <CreatePetPage />
+          </Route>
+          <Route path='/*'>
+            <NotFound />
+          </Route>
+        </Switch>
+      </main>
     </Router>
   );
 }
