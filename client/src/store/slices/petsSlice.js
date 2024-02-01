@@ -160,19 +160,16 @@ const petsSlice = createSlice({
 
     // * DELETE pet
     builder.addCase(deletePetThunk.pending, state => {
-      state.isFetching = true;
       state.error = null;
     });
 
     builder.addCase(deletePetThunk.fulfilled, (state, { payload }) => {
       state.pets = state.pets.filter(pet => pet.id !== payload);
       state.error = null;
-      state.isFetching = false;
     });
 
     builder.addCase(deletePetThunk.rejected, (state, { payload }) => {
       state.error = payload;
-      state.isFetching = false;
     });
   },
 });

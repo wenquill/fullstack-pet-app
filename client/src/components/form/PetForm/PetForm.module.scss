@@ -1,0 +1,54 @@
+.cont {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.imageSection {
+  flex: 1;
+
+  @media screen and (max-width: 800px) {
+    & {
+      display: none;
+    }
+  }
+}
+
+.formSection {
+  flex: 1;
+}
+
+.image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.title {
+  max-width: 700px;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 40px;
+}
+
+.form {
+  margin: 10px;
+  padding: 20px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.error {
+  position: absolute;
+  top: 57px;
+  color: rgb(201, 36, 36)
+}

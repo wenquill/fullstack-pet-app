@@ -4,7 +4,7 @@ import styles from './Header.module.scss';
 
 function Header () {
   return (
-    <header className={styles.header}>
+    <header className={`container ${styles.header}`}>
       <nav className={styles.nav}>
         <div>
           <FaShieldCat size={30} />
@@ -18,12 +18,12 @@ function Header () {
           </li>
           <li className={styles.listItem}>
             <Link className={styles.link} to='/pet/create'>
-              Add pet
+              Find my pet
             </Link>
           </li>
           <li className={styles.listItem}>
             <Link className={styles.link} to='/pets'>
-              Pet list
+              Our pets
             </Link>
           </li>
         </ul>

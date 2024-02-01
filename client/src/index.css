@@ -48,7 +48,7 @@ select {
   font-family: inherit;
   padding: 0 10px;
   outline: none;
-  margin: 5px 10px;
+  margin: 5px 10px 5px 0;
   background: transparent;
   border: 1px solid #000;
   border-radius: 5px;
