@@ -9,6 +9,7 @@ function FilterSection ({
   handleChange,
   typeName,
   selectName,
+  callback,
 }) {
   return (
     <label className={styles.filterType}>
@@ -16,10 +17,10 @@ function FilterSection ({
       <select
         className={styles.select}
         name={selectName}
-        value={filterType || 'all'}
-        onChange={e => handleChange(e.target.value)}
+        value={filterType || ''}
+        onChange={e => handleChange(e.target.value, callback)}
       >
-        <option value='all'>all</option>
+        <option value=''>all</option>
         {options.map(opt => (
           <option key={opt[optId]} value={opt[optValue]}>
             {opt[optText]}

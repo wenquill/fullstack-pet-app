@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   changeCityFilter,
+  changeIsFoundFilter,
   changePageFilter,
   changePetTypeFilter,
   deletePetThunk,
@@ -13,7 +14,7 @@ import Pagination from '../Pagination';
 import SinglePetCard from '../SinglePetCard';
 import styles from './PetsList.module.scss';
 import FilterSection from '../FilterSection';
-import { CITIES } from '../../utils/constants';
+import { CITIES, IS_FOUND_OPTIONS } from '../../utils/constants';
 import Button from '../Button';
 import Loading from '../pageState/Loading';
 import Error from '../pageState/Error';
@@ -32,6 +33,7 @@ function PetsList ({
   deletePet,
   changePage,
   changeCity,
+  changeIsFound,
 }) {
   useEffect(() => {
     getPetTypes();
@@ -41,19 +43,16 @@ function PetsList ({
     getPets(filter);
   }, [filter]);
 
-  const handleChangePetType = value => {
-    changePetType(value);
-    changePage(1);
-  };
-
-  const handleChangeCity = value => {
-    changeCity(value);
+  const handleChange = (value, callback) => {
+    callback(value);
     changePage(1);
   };
 
   const handleResetFilters = value => {
-    handleChangePetType(value);
-    handleChangeCity(value);
+    changePetType(value);
+    changeCity(value);
+    changeIsFound(value);
+    changePage(1);
   };
 
   return (
@@ -66,7 +65,8 @@ function PetsList ({
             optId='id'
             optValue='id'
             optText='type'
-            handleChange={handleChangePetType}
+            handleChange={handleChange}
+            callback={changePetType}
             typeName='Type'
             selectName='petTypeId'
           />
@@ -77,9 +77,22 @@ function PetsList ({
             optId='id'
             optValue='name'
             optText='name'
-            handleChange={handleChangeCity}
+            handleChange={handleChange}
+            callback={changeCity}
             typeName='City'
             selectName='city'
+          />
+
+          <FilterSection
+            filterType={filter.isFound}
+            options={IS_FOUND_OPTIONS}
+            optId='id'
+            optValue='value'
+            optText='text'
+            handleChange={handleChange}
+            callback={changeIsFound}
+            typeName='Is pet found'
+            selectName='isFound'
           />
 
           <Button
@@ -104,9 +117,7 @@ function PetsList ({
                 updatePet={updatePet}
               />
             ))}
-          {!isFetching && !error && pets?.length === 0 && (
-            <NoContent/>
-          )}
+          {!isFetching && !error && pets?.length === 0 && <NoContent />}
         </ul>
       </section>
     </>
@@ -123,6 +134,7 @@ const mapDispatchToProps = dispatch => ({
   deletePet: id => dispatch(deletePetThunk(id)),
   changePage: value => dispatch(changePageFilter(value)),
   changeCity: value => dispatch(changeCityFilter(value)),
+  changeIsFound: value => dispatch(changeIsFoundFilter(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PetsList);

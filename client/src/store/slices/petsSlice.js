@@ -13,6 +13,7 @@ const initialState = {
     page: 1,
     results: 8,
     city: null,
+    isFound: null,
   },
 };
 
@@ -93,6 +94,10 @@ const petsSlice = createSlice({
 
     changeCityFilter: (state, { payload }) => {
       state.filter.city = payload;
+    },
+
+    changeIsFoundFilter: (state, { payload }) => {
+      state.filter.isFound = payload;
     },
   },
 
@@ -176,7 +181,11 @@ const petsSlice = createSlice({
 
 const { reducer, actions } = petsSlice;
 
-export const { changePetTypeFilter, changePageFilter, changeCityFilter } =
-  actions;
+export const {
+  changePetTypeFilter,
+  changePageFilter,
+  changeCityFilter,
+  changeIsFoundFilter,
+} = actions;
 
 export default reducer;
