@@ -1,20 +1,22 @@
-import React from 'react';
+import Button from '../Button';
+import styles from './Pagination.module.scss';
 
 function Pagination ({ filter, pets, changePage }) {
   return (
-    <div>
-      <button
-        disabled={filter.page === 1}
-        onClick={() => changePage(filter.page - 1)}
-      >
-        {'<'}
-      </button>
-      <button
-        disabled={pets.length < filter.results}
-        onClick={() => changePage(filter.page + 1)}
-      >
-        {'>'}
-      </button>
+    <div className={styles.cont}>
+      <Button
+        onClickHandler={changePage}
+        handlerCondition={filter.page - 1}
+        disabledCondition={filter.page === 1}
+        label={`${'<'} back`}
+      />
+
+      <Button
+        onClickHandler={changePage}
+        handlerCondition={filter.page + 1}
+        disabledCondition={pets.length < filter.results}
+        label={`forward ${'>'}`}
+      />
     </div>
   );
 }

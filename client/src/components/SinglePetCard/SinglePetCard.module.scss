@@ -1,0 +1,70 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  padding: 10px;
+  min-width: 250px;
+  gap: 5px;
+
+  @media screen and (max-width: 768px) {
+    & {
+      flex: 1;
+    }
+  }
+}
+
+.imageContainer {
+  width: 100%;
+  max-height: 250px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+}
+
+.buttons {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 1.5px solid #000000;
+  flex: 0 0 auto;
+  cursor: pointer;
+
+  position: relative;
+
+  &:checked {
+    border-color: transparent;
+    background-color: #5ba14d;
+    border: 1.5px solid #000000;
+  }
+
+  &:checked:before {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    content: '';
+    color: #fff;
+    background-image: url(./bx-check.svg);
+    width: 19px;
+    height: 19px;
+    z-index: 5;
+  }
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

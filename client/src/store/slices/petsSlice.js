@@ -11,7 +11,8 @@ const initialState = {
   filter: {
     petTypeId: null,
     page: 1,
-    results: 10,
+    results: 8,
+    city: null,
   },
 };
 
@@ -51,6 +52,21 @@ export const getPetsThunk = createAsyncThunk(
   }
 );
 
+export const updatePetsThunk = createAsyncThunk(
+  `${PET_SLICE_NAME}/patch/pets`,
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await API.updatePet({
+        id: payload.id,
+        data: payload.data,
+      });
+      return data;
+    } catch (err) {
+      return rejectWithValue({ errors: err.response.data });
+    }
+  }
+);
+
 export const deletePetThunk = createAsyncThunk(
   `${PET_SLICE_NAME}/delete/id`,
   async (payload, { rejectWithValue }) => {
@@ -75,8 +91,8 @@ const petsSlice = createSlice({
       state.filter.page = payload;
     },
 
-    changeResultsFilter: (state, { payload }) => {
-      state.filter.results = payload;
+    changeCityFilter: (state, { payload }) => {
+      state.filter.city = payload;
     },
   },
 
@@ -100,6 +116,7 @@ const petsSlice = createSlice({
     builder.addCase(createPetThunk.fulfilled, (state, { payload }) => {
       state.pets.push(payload);
       state.error = null;
+      state.isFetching = false;
     });
 
     builder.addCase(createPetThunk.rejected, (state, { payload }) => {
@@ -116,9 +133,31 @@ const petsSlice = createSlice({
     builder.addCase(getPetsThunk.fulfilled, (state, { payload }) => {
       state.pets = [...payload];
       state.error = null;
+      state.isFetching = false;
     });
 
     builder.addCase(getPetsThunk.rejected, (state, { payload }) => {
+      state.error = payload;
+      state.isFetching = false;
+    });
+
+    // * PATCH pet
+    builder.addCase(updatePetsThunk.pending, state => {
+      state.isFetching = true;
+      state.error = null;
+    });
+
+    builder.addCase(updatePetsThunk.fulfilled, (state, { payload }) => {
+      const updatedPetIndex = state.pets.findIndex(p => p.id === payload.id);
+      state.pets[updatedPetIndex] = {
+        ...state.pets[updatedPetIndex],
+        ...payload,
+      };
+
+      state.isFetching = false;
+    });
+
+    builder.addCase(updatePetsThunk.rejected, (state, { payload }) => {
       state.error = payload;
       state.isFetching = false;
     });
@@ -132,6 +171,7 @@ const petsSlice = createSlice({
     builder.addCase(deletePetThunk.fulfilled, (state, { payload }) => {
       state.pets = state.pets.filter(pet => pet.id !== payload);
       state.error = null;
+      state.isFetching = false;
     });
 
     builder.addCase(deletePetThunk.rejected, (state, { payload }) => {
@@ -143,7 +183,7 @@ const petsSlice = createSlice({
 
 const { reducer, actions } = petsSlice;
 
-export const { changePetTypeFilter, changePageFilter, changeResultsFilter } =
+export const { changePetTypeFilter, changePageFilter, changeCityFilter } =
   actions;
 
 export default reducer;

@@ -1,7 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
+
 *,
 *:before,
 *:after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: Gaegu, sans-serif;
+  font-size: 20px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+input {
+  font-size: inherit;
+  font-family: inherit;
+  border: 1px solid #000;
+  border-radius: 7px;
+  outline: none;
+  padding: 3px 0 3px 5px;
+}
+
+button {
+  font-size: inherit;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+select {
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0 10px;
+  outline: none;
+  margin: 5px 10px;
+  background: transparent;
+  border: 1px solid #000;
+  border-radius: 5px;
+  overflow: hidden;
+  -moz-appearance: none;
+}
+
+select > option:hover {
+  background-color: #eee;
 }

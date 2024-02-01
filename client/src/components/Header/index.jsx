@@ -1,34 +1,33 @@
-import { Route, Switch, Link } from 'react-router-dom';
-import CreatePetPage from './../../pages/CreatePetPage';
-import PetsListPage from './../../pages/PetsListPage';
+import { Link } from 'react-router-dom';
+import { FaShieldCat } from 'react-icons/fa6';
+import styles from './Header.module.scss';
 
 function Header () {
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <Link to='/pet/create'>Add pet</Link>
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        <div>
+          <FaShieldCat size={30} />
+        </div>
+
+        <ul className={styles.list}>
+          <li className={styles.listItem}>
+            <Link className={styles.link} to='/'>
+              Home
+            </Link>
           </li>
-          <li>
-            <Link to='/pets'>Pet list</Link>
+          <li className={styles.listItem}>
+            <Link className={styles.link} to='/pet/create'>
+              Add pet
+            </Link>
           </li>
-          <li>
-            <Link to='/'>Home</Link>
+          <li className={styles.listItem}>
+            <Link className={styles.link} to='/pets'>
+              Pet list
+            </Link>
           </li>
         </ul>
       </nav>
-      <Switch>
-        <Route exact path='/'>
-          home
-        </Route>
-        <Route path='/pets'>
-          <PetsListPage />
-        </Route>
-        <Route path='/pet/create'>
-          <CreatePetPage />
-        </Route>
-      </Switch>
     </header>
   );
 }

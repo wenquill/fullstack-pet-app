@@ -1,14 +1,20 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
+  changeCityFilter,
   changePageFilter,
   changePetTypeFilter,
-  changeResultsFilter,
   deletePetThunk,
   getPetsThunk,
   getTypesThunk,
+  updatePetsThunk,
 } from '../../store/slices/petsSlice';
 import Pagination from '../Pagination';
+import SinglePetCard from '../SinglePetCard';
+import styles from './PetsList.module.scss';
+import FilterSection from '../FilterSection';
+import { CITIES } from '../../utils/constants';
+import Button from '../Button';
 
 function PetsList ({
   pets,
@@ -19,9 +25,10 @@ function PetsList ({
   getPets,
   getPetTypes,
   changePetType,
+  updatePet,
   deletePet,
   changePage,
-  changeResults,
+  changeCity,
 }) {
   useEffect(() => {
     getPetTypes();
@@ -31,36 +38,71 @@ function PetsList ({
     getPets(filter);
   }, [filter]);
 
+  const handleChangePetType = value => {
+    changePetType(value);
+    changePage(1);
+  };
+
+  const handleChangeCity = value => {
+    changeCity(value);
+    changePage(1);
+  };
+
+  const handleResetFilters = value => {
+    handleChangePetType(value);
+    handleChangeCity(value);
+  };
+
   // TODO error, isFetching and create another conmponent with pet card
   return (
     <>
-      <section>
-        <span>Types: </span>
-        {petTypes.map(type => (
-          <label key={type.id}>
-            <input
-              checked={type.id === filter.petTypeId}
-              type='radio'
-              name='petTypeId'
-              value={type.id}
-              onChange={() => changePetType(type.id)}
-            />
-            {type.type}
-          </label>
-        ))}
-        <button onClick={() => changePetType(null)}>reset filters</button>
-      </section>
-      <ul>
-        {pets?.map(pet => (
-          <li key={pet.id}>
-            {pet.name}, {pet.owner}, {pet.ownerContacts},{' '}
-            {petTypes?.find(t => t.id === pet.petTypeId)?.type}
-            <button onClick={() => deletePet(pet.id)}>X</button>
-          </li>
-        ))}
-      </ul>
+      <section className={styles.petsSection}>
+        <div className={styles.filters}>
+          <FilterSection
+            filterType={filter.petTypeId}
+            options={petTypes}
+            optId='id'
+            optValue='id'
+            optText='type'
+            handleChange={handleChangePetType}
+            typeName='Type'
+            selectName='petTypeId'
+          />
 
-      <Pagination filter={filter} pets={pets} changePage={changePage} />
+          <FilterSection
+            filterType={filter.city}
+            options={CITIES}
+            optId='id'
+            optValue='name'
+            optText='name'
+            handleChange={handleChangeCity}
+            typeName='City'
+            selectName='city'
+          />
+
+          <Button
+            onClickHandler={handleResetFilters}
+            handlerCondition={''}
+            label='Reset filters'
+          />
+
+          <Pagination filter={filter} pets={pets} changePage={changePage} />
+        </div>
+        <ul className={styles.petsList}>
+          {isFetching && <div>loading...</div>}
+          {error && <div>ERROR!!!!</div>}
+          {pets?.map(pet => (
+            <SinglePetCard
+              key={pet.id}
+              pet={pet}
+              petTypes={petTypes}
+              deletePet={deletePet}
+              updatePet={updatePet}
+            />
+          ))}
+          {pets?.length === 0 && <div>no results ):</div>}
+        </ul>
+      </section>
     </>
   );
 }
@@ -71,9 +113,10 @@ const mapDispatchToProps = dispatch => ({
   getPets: data => dispatch(getPetsThunk(data)),
   getPetTypes: () => dispatch(getTypesThunk()),
   changePetType: value => dispatch(changePetTypeFilter(value)),
+  updatePet: (id, data) => dispatch(updatePetsThunk({ id, data })),
   deletePet: id => dispatch(deletePetThunk(id)),
   changePage: value => dispatch(changePageFilter(value)),
-  changeResults: value => dispatch(changeResultsFilter(value)),
+  changeCity: value => dispatch(changeCityFilter(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PetsList);

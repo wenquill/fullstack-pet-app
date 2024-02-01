@@ -48,6 +48,7 @@ module.exports.getPets = async (req, res, next) => {
       where: whereConditions,
       limit: parseInt(results),
       offset: parseInt(offset),
+      order: ['createdAt'],
     });
 
     if (!foundTypes) {
