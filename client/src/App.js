@@ -4,6 +4,7 @@ import CreatePetPage from './pages/CreatePetPage';
 import PetsListPage from './pages/PetsListPage';
 import Header from './components/Header';
 import Home from './pages/Home';
+import NotFound from './pages/404';
 
 function App () {
   return (
@@ -19,6 +20,9 @@ function App () {
             </Route>
             <Route path='/pet/create'>
               <CreatePetPage />
+            </Route>
+            <Route path='/*'>
+              <NotFound />
             </Route>
           </Switch>
         </main>

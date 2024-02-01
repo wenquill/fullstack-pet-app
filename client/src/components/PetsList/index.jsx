@@ -56,9 +56,6 @@ function PetsList ({
     handleChangeCity(value);
   };
 
-  console.log(error);
-
-  // TODO error, isFetching and create another conmponent with pet card
   return (
     <>
       <section className={styles.petsSection}>
