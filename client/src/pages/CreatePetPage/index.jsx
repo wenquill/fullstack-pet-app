@@ -3,7 +3,7 @@ import styles from './../../components/form/PetForm/PetForm.module.scss';
 
 function CreatePetPage () {
   return (
-    <div>
+    <div className={styles.outer}>
       <h1 className={styles.title}>
         Your pet got lost? Fill out the form and we`ll help you to find it!
       </h1>

@@ -8,6 +8,14 @@
   justify-content: center;
   align-items: center;
   gap: 15px;
+  margin: 10px;
+
+  @media screen and (max-width: 500px) {
+    & {
+      position: static;
+      transform: none;
+    }
+  }
 }
 
 .text {

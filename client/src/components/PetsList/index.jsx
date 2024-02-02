@@ -91,7 +91,7 @@ function PetsList ({
             optText='text'
             handleChange={handleChange}
             callback={changeIsFound}
-            typeName='Is pet found'
+            typeName='Is found'
             selectName='isFound'
           />
 
@@ -101,7 +101,7 @@ function PetsList ({
             label='Reset filters'
           />
 
-          <Pagination filter={filter} pets={pets} changePage={changePage} />
+          <Pagination className={styles.upperPagination} filter={filter} pets={pets} changePage={changePage} />
         </div>
         <ul className={styles.petsList}>
           {isFetching && <Loading isFetching={isFetching} />}
@@ -119,6 +119,7 @@ function PetsList ({
             ))}
           {!isFetching && !error && pets?.length === 0 && <NoContent />}
         </ul>
+        <Pagination className={styles.dynamicPagination} filter={filter} pets={pets} changePage={changePage} />
       </section>
     </>
   );
