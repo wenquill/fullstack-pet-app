@@ -42,14 +42,16 @@
   min-width: 60px;
 }
 
-
 .dynamicPagination {
   display: none;
 
   @media screen and (max-width: 500px) {
     & {
       display: flex;
-      
     }
   }
+}
+
+.upperPagination {
+  margin-top: 10px;
 }

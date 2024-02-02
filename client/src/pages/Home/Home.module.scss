@@ -1,1 +1,141 @@
+@import './../../index.scss';
 
+.upperSection {
+  background-color: $main;
+}
+
+.cont {
+  display: flex;
+  gap: 30px;
+  padding-top: 20px;
+  justify-content: space-between;
+  max-height: 650px;
+
+  @media screen and (max-width: 1144px) {
+    max-height: none;
+  }
+}
+
+.imageContainer {
+  flex: 4;
+  width: 100%;
+  overflow: hidden;
+
+  @media screen and (max-width: 1144px) {
+    display: none;
+  }
+}
+
+.textContainer {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+
+  @media screen and (max-width: 1144px) {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+}
+
+.title {
+  font-size: 70px;
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  margin-bottom: 10px;
+
+  @media screen and (max-width: 400px) {
+    flex-direction: column;
+  }
+}
+
+.linkBtn {
+  padding: 13px 30px;
+  font-size: 22px;
+  border-radius: 5px;
+}
+
+.secondCont {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 50px auto;
+}
+
+.cards {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.card {
+  padding: 20px;
+  flex: 1;
+  border-radius: 10px;
+  background: linear-gradient(45deg, $main, #fff);
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 15px;
+  min-width: 250px;
+}
+
+.subtitle {
+  font-size: 35px;
+  text-align: center;
+}
+
+.thirdSection {
+  background-color: $main;
+}
+
+.thirdCont {
+  display: flex;
+  gap: 20px;
+  background-color: $main;
+  align-items: center;
+
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
+}
+
+.carouselContainer {
+  flex: 1;
+
+  @media screen and (max-width: 700px) {
+    display: none;
+  }
+}
+
+.textCont {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media screen and (max-width: 1200px) {
+    max-width: 700px;
+    margin: 20px auto;
+  }
+}
+
+.art {
+  border-radius: 10px;
+  background: linear-gradient(to left, $main, #fff, #fff);
+  padding: 10px;
+}

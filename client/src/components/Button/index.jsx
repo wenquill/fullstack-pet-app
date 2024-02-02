@@ -7,7 +7,7 @@ function Button ({
   disabledCondition,
   className,
 }) {
-  return (
+  return ( 
     <button
       disabled={disabledCondition}
       onClick={() => onClickHandler(handlerCondition)}

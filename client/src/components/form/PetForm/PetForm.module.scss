@@ -1,3 +1,5 @@
+@import './../../../index.scss';
+
 .cont {
   height: 100%;
   display: flex;
@@ -16,7 +18,7 @@
 }
 
 .outer {
-  margin: 10px;
+  padding: 0 10px;
 }
 
 .formSection {
@@ -38,10 +40,11 @@
 .form {
   margin: 10px;
   padding: 20px;
-  border: 2px solid #000;
+
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(to bottom, $main, #fff);
   gap: 20px;
 
   @media screen and (max-width: 800px) {

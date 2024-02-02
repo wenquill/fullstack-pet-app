@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Inter&family=Montserrat:wght@500&family=Poppins&display=swap');
 
 *,
 *:before,
@@ -8,9 +8,17 @@
   box-sizing: border-box;
 }
 
+$main: rgb(227, 227, 219);
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   font-family: Gaegu, sans-serif;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 ul {
@@ -20,11 +28,17 @@ ul {
 a {
   text-decoration: none;
   color: inherit;
+
+  &:hover {
+    text-decoration: none;
+    color: #4b4b4b;
+  }
 }
 
 .container {
   max-width: 1500px;
   margin: 0 auto;
+  width: 100%;
 }
 
 input {
@@ -34,6 +48,7 @@ input {
   border-radius: 7px;
   outline: none;
   padding: 3px 0 3px 5px;
+  background-color: transparent;
 }
 
 button {

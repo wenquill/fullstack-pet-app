@@ -4,12 +4,13 @@ import PetsListPage from './pages/PetsListPage';
 import Header from './components/Header';
 import Home from './pages/Home';
 import NotFound from './pages/404';
+import Footer from './components/Footer';
 
 function App () {
   return (
     <Router>
       <Header />
-      <main className='container'>
+      <main>
         <Switch>
           <Route exact path='/'>
             <Home />
@@ -25,6 +26,7 @@ function App () {
           </Route>
         </Switch>
       </main>
+      <Footer />
     </Router>
   );
 }
