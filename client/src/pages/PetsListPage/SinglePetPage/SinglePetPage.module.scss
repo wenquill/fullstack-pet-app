@@ -1,0 +1,32 @@
+.cont {
+  display: flex;
+  margin-top: 40px;
+  gap: 20px;
+
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+  }
+}
+
+.imageContainer {
+  flex: 1;
+}
+
+.textContainer {
+  flex: 1;
+}
+
+.image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.petsList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.petsCont {
+  margin-top: 40px;
+}

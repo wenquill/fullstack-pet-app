@@ -7,6 +7,8 @@ export const getPetTypes = () => httpClient.get('/pettypes');
 
 export const createPet = values => httpClient.post('/pets', values);
 
+export const getPet = id => httpClient.get(`/pets/${id}`);
+
 export const getPets = filter =>
   httpClient.get(`/pets?${queryString.stringify(filter)}`);
 

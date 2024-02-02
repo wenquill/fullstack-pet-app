@@ -5,6 +5,7 @@ const PET_SLICE_NAME = 'pets';
 
 const initialState = {
   pets: [],
+  singlePet: {},
   petTypes: [],
   isFetching: false,
   error: null,
@@ -46,6 +47,18 @@ export const getPetsThunk = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await API.getPets(payload);
+      return data;
+    } catch (err) {
+      return rejectWithValue({ errors: err.response.data });
+    }
+  }
+);
+
+export const getPetThunk = createAsyncThunk(
+  `${PET_SLICE_NAME}/get/pet`,
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await API.getPet(payload);
       return data;
     } catch (err) {
       return rejectWithValue({ errors: err.response.data });
@@ -142,6 +155,23 @@ const petsSlice = createSlice({
     });
 
     builder.addCase(getPetsThunk.rejected, (state, { payload }) => {
+      state.error = payload;
+      state.isFetching = false;
+    });
+
+    // * GET pet
+    builder.addCase(getPetThunk.pending, state => {
+      state.isFetching = true;
+      state.error = null;
+    });
+
+    builder.addCase(getPetThunk.fulfilled, (state, { payload }) => {
+      state.singlePet = payload;
+      state.error = null;
+      state.isFetching = false;
+    });
+
+    builder.addCase(getPetThunk.rejected, (state, { payload }) => {
       state.error = payload;
       state.isFetching = false;
     });

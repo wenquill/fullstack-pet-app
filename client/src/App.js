@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import NotFound from './pages/404';
 import Footer from './components/Footer';
+import SinglePetPage from './pages/PetsListPage/SinglePetPage';
 
 function App () {
   return (
@@ -15,8 +16,11 @@ function App () {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route path='/pets'>
+          <Route exact path='/pets'>
             <PetsListPage />
+          </Route>
+          <Route exact path='/pets/:id'>
+            <SinglePetPage />
           </Route>
           <Route path='/pet/create'>
             <CreatePetPage />

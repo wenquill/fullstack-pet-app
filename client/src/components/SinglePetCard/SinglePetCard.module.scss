@@ -4,13 +4,21 @@
   width: 25%;
   padding: 10px;
   min-width: 250px;
-  gap: 5px;
+  gap: 10px;
 
   @media screen and (max-width: 768px) {
     & {
       flex: 1;
     }
   }
+}
+
+p {
+  margin: 0;
+}
+
+.name {
+  margin-top: 8px;
 }
 
 .imageContainer {
