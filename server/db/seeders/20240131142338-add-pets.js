@@ -102,6 +102,54 @@ module.exports = {
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
         },
+        {
+          name: 'Ruby',
+          owner: 'Alice',
+          owner_contacts: '+1234567822',
+          description:
+            'Ruby is a fluffy white rabbit with blue eyes. She went missing on January 21, 2024, in Dnipro. If found, please contact her owner Sarah at the provided phone number.',
+          city: 'Kyiv',
+          pet_type_id: 5,
+          lost_date: '2024-01-24',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        },
+        {
+          name: 'Dummy',
+          owner: 'Alisha',
+          owner_contacts: '+1234457890',
+          description:
+            'Dummy is a fluffy white rabbit with blue eyes. She went missing on January 21, 2024, in Dnipro. If found, please contact her owner Sarah at the provided phone number.',
+          city: 'New York',
+          pet_type_id: 4,
+          lost_date: '2024-01-21',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        },
+        {
+          name: 'Sen',
+          owner: 'Rico',
+          owner_contacts: '+1234518735',
+          description:
+            'Sen is a fluffy white rabbit with blue eyes. She went missing on January 21, 2024, in Dnipro. If found, please contact her owner Sarah at the provided phone number.',
+          city: 'Kyiv',
+          pet_type_id: 3,
+          lost_date: '2024-02-01',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        },
+        {
+          name: 'Felix',
+          owner: 'Lisa',
+          owner_contacts: '+1234560987',
+          description:
+            'Felix is a fluffy white rabbit with blue eyes. She went missing on January 21, 2024, in Dnipro. If found, please contact her owner Sarah at the provided phone number.',
+          city: 'Dnipro',
+          pet_type_id: 1,
+          lost_date: '2024-01-12',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        },
       ],
       {}
     );

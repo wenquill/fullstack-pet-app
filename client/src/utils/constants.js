@@ -10,31 +10,31 @@ export const SLIDES_CONTENT = [
     title: 'First slide label',
     text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.',
     image: i1,
-  }, 
+  },
   {
     id: '2',
     title: 'Second slide label',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     image: i2,
-  }, 
+  },
   {
     id: '3',
     title: 'Third slide label',
     text: ' Praesent commodo cursus magna, vel scelerisque nisl consectetur.',
     image: i3,
-  }, 
+  },
   {
     id: '4',
     title: 'Fourth slide label',
     text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.',
     image: i4,
-  }, 
+  },
   {
     id: '5',
     title: 'Fifth slide label',
     text: ' Praesent commodo cursus magna, vel scelerisque nisl consectetur.',
     image: i5,
-  }, 
+  },
 ];
 
 export const CITIES = [
@@ -56,12 +56,25 @@ export const IS_FOUND_OPTIONS = [
   {
     id: '1',
     value: true,
-    text: 'found'
+    text: 'found',
   },
   {
     id: '2',
     value: false,
-    text: 'not found'
+    text: 'not found',
+  },
+];
+
+export const ORDER_OPTIONS = [
+  {
+    id: '1',
+    value: ['createdAt', 'ASC'],
+    text: 'newest',
+  },
+  {
+    id: '2',
+    value: ['createdAt', 'DESC'],
+    text: 'oldest',
   },
 ];
 

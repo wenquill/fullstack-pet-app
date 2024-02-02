@@ -28,11 +28,12 @@ module.exports.getPets = async (req, res, next) => {
   const queries = req.query;
   const page = queries.page || 1;
   const results = queries.results || 10;
+  const order = queries.order;
 
   const whereConditions = {};
 
   Object.keys(queries)
-    .filter(key => key !== 'page' && key !== 'results')
+    .filter(key => key !== 'page' && key !== 'results' && key !== 'order')
     .forEach(key => {
       if (queries[key]) {
         whereConditions[key] = queries[key];
@@ -50,7 +51,7 @@ module.exports.getPets = async (req, res, next) => {
       where: whereConditions,
       limit: parseInt(results),
       offset: parseInt(offset),
-      order: ['createdAt'],
+      order: [[order.split(',')]],
     });
 
     if (!foundTypes) {

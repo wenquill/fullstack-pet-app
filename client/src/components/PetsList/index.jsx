@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   changeCityFilter,
   changeIsFoundFilter,
+  changeOrder,
   changePageFilter,
   changePetTypeFilter,
   deletePetThunk,
@@ -14,7 +15,7 @@ import Pagination from '../Pagination';
 import SinglePetCard from '../SinglePetCard';
 import styles from './PetsList.module.scss';
 import FilterSection from '../FilterSection';
-import { CITIES, IS_FOUND_OPTIONS } from '../../utils/constants';
+import { CITIES, IS_FOUND_OPTIONS, ORDER_OPTIONS } from '../../utils/constants';
 import Button from '../Button';
 import Loading from '../pageState/Loading';
 import Error from '../pageState/Error';
@@ -34,6 +35,7 @@ function PetsList ({
   changePage,
   changeCity,
   changeIsFound,
+  changePetOrder,
 }) {
   useEffect(() => {
     getPetTypes();
@@ -52,6 +54,7 @@ function PetsList ({
     changePetType(value);
     changeCity(value);
     changeIsFound(value);
+    changePetOrder(value);
     changePage(1);
   };
 
@@ -59,6 +62,8 @@ function PetsList ({
     <>
       <section className={styles.petsSection}>
         <div className={styles.filters}>
+          <p className={styles.filtersTitle}>--- Filters ---</p>
+
           <FilterSection
             filterType={filter.petTypeId}
             options={petTypes}
@@ -95,13 +100,36 @@ function PetsList ({
             selectName='isFound'
           />
 
+          <p className={styles.filtersTitle}>--- Initially ---</p>
+
+          <label className={styles.filterType}>
+            <span>Order by: </span>
+            <select
+              className={styles.select}
+              name='order'
+              value={filter.order}
+              onChange={e => handleChange(e.target.value, changePetOrder)}
+            >
+              {ORDER_OPTIONS.map(opt => (
+                <option key={opt.id} value={opt.value}>
+                  {opt.text}
+                </option>
+              ))}
+            </select>
+          </label>
+
           <Button
             onClickHandler={handleResetFilters}
             handlerCondition={''}
             label='Reset filters'
           />
 
-          <Pagination className={styles.upperPagination} filter={filter} pets={pets} changePage={changePage} />
+          <Pagination
+            className={styles.upperPagination}
+            filter={filter}
+            pets={pets}
+            changePage={changePage}
+          />
         </div>
         <ul className={styles.petsList}>
           {isFetching && <Loading isFetching={isFetching} />}
@@ -119,7 +147,12 @@ function PetsList ({
             ))}
           {!isFetching && !error && pets?.length === 0 && <NoContent />}
         </ul>
-        <Pagination className={styles.dynamicPagination} filter={filter} pets={pets} changePage={changePage} />
+        <Pagination
+          className={styles.dynamicPagination}
+          filter={filter}
+          pets={pets}
+          changePage={changePage}
+        />
       </section>
     </>
   );
@@ -136,6 +169,7 @@ const mapDispatchToProps = dispatch => ({
   changePage: value => dispatch(changePageFilter(value)),
   changeCity: value => dispatch(changeCityFilter(value)),
   changeIsFound: value => dispatch(changeIsFoundFilter(value)),
+  changePetOrder: value => dispatch(changeOrder(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PetsList);

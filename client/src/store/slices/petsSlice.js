@@ -15,11 +15,12 @@ const initialState = {
     results: 8,
     city: null,
     isFound: null,
+    order: 'createdAt,ASC',
   },
 };
 
 export const getTypesThunk = createAsyncThunk(
-  `${PET_SLICE_NAME}/get/types`,
+  `${PET_SLICE_NAME}/get`,
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await API.getPetTypes();
@@ -44,7 +45,7 @@ export const createPetThunk = createAsyncThunk(
 );
 
 export const getPetsThunk = createAsyncThunk(
-  `${PET_SLICE_NAME}/get/pets`,
+  `${PET_SLICE_NAME}/get/pet`,
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await API.getPets(payload);
@@ -56,7 +57,7 @@ export const getPetsThunk = createAsyncThunk(
 );
 
 export const getPetThunk = createAsyncThunk(
-  `${PET_SLICE_NAME}/get/pet`,
+  `${PET_SLICE_NAME}/get/pets`,
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await API.getPet(payload);
@@ -68,7 +69,7 @@ export const getPetThunk = createAsyncThunk(
 );
 
 export const updatePetsThunk = createAsyncThunk(
-  `${PET_SLICE_NAME}/patch/pets`,
+  `${PET_SLICE_NAME}/patch`,
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await API.updatePet({
@@ -83,7 +84,7 @@ export const updatePetsThunk = createAsyncThunk(
 );
 
 export const deletePetThunk = createAsyncThunk(
-  `${PET_SLICE_NAME}/delete/id`,
+  `${PET_SLICE_NAME}/delete`,
   async (payload, { rejectWithValue }) => {
     try {
       await API.deletePet(payload);
@@ -112,6 +113,10 @@ const petsSlice = createSlice({
 
     changeIsFoundFilter: (state, { payload }) => {
       state.filter.isFound = payload;
+    },
+
+    changeOrder: (state, { payload }) => {
+      state.filter.order = payload;
     },
   },
 
@@ -216,6 +221,7 @@ export const {
   changePageFilter,
   changeCityFilter,
   changeIsFoundFilter,
+  changeOrder
 } = actions;
 
 export default reducer;

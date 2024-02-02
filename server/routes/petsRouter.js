@@ -1,16 +1,12 @@
 const { Router } = require('express');
 const { petsControllers } = require('../controllers');
-const { validation, uploadFile } = require('../middleware');
+const { uploadFile } = require('../middleware');
 
 const petsRouter = Router();
 
 petsRouter
   .route('/')
-  .post(
-    validation.validatePetOnCreate,
-    uploadFile.uploadPhoto,
-    petsControllers.createPet
-  )
+  .post(uploadFile.uploadPhoto, petsControllers.createPet)
   .get(petsControllers.getPets);
 
 petsRouter

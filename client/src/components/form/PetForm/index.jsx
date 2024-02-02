@@ -136,6 +136,7 @@ function PetForm ({ petTypes, getPetTypes, createPet }) {
               <label>
                 <p>Photo:</p>
                 <input
+                  className={styles.photoLabel}
                   type='file'
                   name='petPhoto'
                   onChange={e =>

@@ -43,6 +43,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      image: {
+        type: DataTypes.STRING,
+      },
       lostDate: {
         type: DataTypes.DATEONLY,
         validate: {
