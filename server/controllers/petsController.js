@@ -4,9 +4,13 @@ const { OMIT } = require('../utils/constants/functions');
 const { Op } = require('sequelize');
 
 module.exports.createPet = async (req, res, next) => {
-  const { body } = req;
+  const { body, file } = req;
 
   try {
+    if (file) {
+      body.image = file.filename;
+    }
+
     const createdPet = await Pet.create(body);
 
     if (!createdPet) {
@@ -120,6 +124,34 @@ module.exports.deletePetById = async (req, res, next) => {
     }
 
     res.status(204).end();
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports.updatePetImage = async (req, res, next) => {
+  const {
+    file,
+    params: { id },
+  } = req;
+
+  try {
+    if (!file) {
+      return next(createHttpError(422, 'Image is required'));
+    }
+
+    const [updatedPetCount, [updatedPet]] = await Pet.update(
+      { image: file.filename },
+      { where: { id }, raw: true, returning: true }
+    );
+
+    if (!updatedPetCount) {
+      return next(createHttpError(404, 'Phone not found ):'));
+    }
+
+    const preparedPet = _.omit(updatedPet, ['createdAt', 'updatedAt']);
+
+    res.status(200).send(preparedPet);
   } catch (err) {
     next(err);
   }
