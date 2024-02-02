@@ -2,7 +2,7 @@ const yup = require('yup');
 const { CITIES } = require('./enums');
 
 module.exports.VALIDATION_PET_SCHEMA = yup.object({
-  name: yup.string().trim().min(1).max(32).required(),
+  name: yup.string().trim().min(2).max(32).required(),
   owner: yup.string().trim().min(2).max(64).required(),
   ownerContacts: yup
     .string()
@@ -12,8 +12,6 @@ module.exports.VALIDATION_PET_SCHEMA = yup.object({
   description: yup.string().required(),
   city: yup.string().oneOf(CITIES).required(),
   petTypeId: yup.number().min(1).required(),
-  lostDate: yup
-    .date()
-    .max(new Date(), 'the date cannot be later than today.')
-    .required(),
+  lostDate: yup.date().max(new Date(), 'the date cannot be later than today.'),
+  petPhoto: yup.mixed(),
 });

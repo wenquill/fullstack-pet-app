@@ -31,9 +31,10 @@ export const getTypesThunk = createAsyncThunk(
 );
 
 export const createPetThunk = createAsyncThunk(
-  `${PET_SLICE_NAME}/post/pet`,
+  `${PET_SLICE_NAME}/post`,
   async (payload, { rejectWithValue }) => {
     try {
+      console.log(payload);
       const { data } = await API.createPet(payload);
       return data;
     } catch (err) {
@@ -133,7 +134,6 @@ const petsSlice = createSlice({
 
     builder.addCase(createPetThunk.fulfilled, (state, { payload }) => {
       state.pets.push(payload);
-      state.error = null;
       state.isFetching = false;
     });
 

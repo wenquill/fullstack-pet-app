@@ -17,6 +17,7 @@ function PetForm ({ petTypes, getPetTypes, createPet }) {
     city: CITIES[0].name,
     lostDate: '',
     petTypeId: petTypes[0]?.id ?? '1',
+    petPhoto: '',
   };
 
   const classes = {
@@ -27,7 +28,20 @@ function PetForm ({ petTypes, getPetTypes, createPet }) {
   };
 
   const handleSubmit = (values, formikBag) => {
-    createPet(values);
+    const formData = new FormData();
+
+    formData.append('name', values.name);
+    formData.append('owner', values.owner);
+    formData.append('ownerContacts', values.ownerContacts);
+    formData.append('description', values.description);
+    formData.append('city', values.city);
+    if (values.lostDate) {
+      formData.append('lostDate', values.lostDate);
+    }
+    formData.append('petTypeId', values.petTypeId);
+    formData.append('petPhoto', values.petPhoto);
+
+    createPet(formData);
     formikBag.resetForm();
   };
 
@@ -118,6 +132,18 @@ function PetForm ({ petTypes, getPetTypes, createPet }) {
                   </select>
                 </label>
               )}
+
+              <label>
+                <p>Photo:</p>
+                <input
+                  type='file'
+                  name='petPhoto'
+                  onChange={e =>
+                    formikProps.setFieldValue('petPhoto', e.target.files[0])
+                  }
+                />
+              </label>
+
               <button type='submit'>Save</button>
             </Form>
           )}
@@ -131,7 +157,7 @@ const mapStateToProps = ({ petsData: { petTypes } }) => ({ petTypes });
 
 const mapDispatchToProps = dispatch => ({
   getPetTypes: () => dispatch(getTypesThunk()),
-  createPet: values => dispatch(createPetThunk(values)),
+  createPet: data => dispatch(createPetThunk(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PetForm);

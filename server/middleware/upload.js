@@ -1,6 +1,6 @@
 const multer = require('multer');
 const path = require('path');
-const { STATIC_PATH } = require('../utils/static');
+const { STATIC_PATH } = require('../static');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
