@@ -5,13 +5,7 @@ module.exports.prepareGetQueries = (req, res, next) => {
   console.log('queries', queries);
 
   Object.keys(queries)
-    .filter(
-      key =>
-        key !== 'offset' &&
-        key !== 'page' &&
-        key !== 'results' &&
-        key !== 'order'
-    )
+    .filter(key => key !== 'order')
     .forEach(key => {
       if (queries[key]) {
         whereConditions[key] = queries[key];
