@@ -1,5 +1,4 @@
 import PetsList from '../../components/PetsList';
-import styles from './../../components/PetsList/PetsList.module.scss';
 
 function PetsListPage () {
   return (

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as API from './../../api';
+import { ORDER_OPTIONS } from '../../utils/constants';
 
 const PET_SLICE_NAME = 'pets';
 
@@ -15,7 +16,7 @@ const initialState = {
     results: 8,
     city: null,
     isFound: null,
-    order: 'createdAt,ASC',
+    order: ORDER_OPTIONS[0].value,
   },
 };
 
@@ -45,7 +46,7 @@ export const createPetThunk = createAsyncThunk(
 );
 
 export const getPetsThunk = createAsyncThunk(
-  `${PET_SLICE_NAME}/get/pet`,
+  `${PET_SLICE_NAME}/get/pets`,
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await API.getPets(payload);
@@ -57,7 +58,7 @@ export const getPetsThunk = createAsyncThunk(
 );
 
 export const getPetThunk = createAsyncThunk(
-  `${PET_SLICE_NAME}/get/pets`,
+  `${PET_SLICE_NAME}/get/pet`,
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await API.getPet(payload);
@@ -221,7 +222,7 @@ export const {
   changePageFilter,
   changeCityFilter,
   changeIsFoundFilter,
-  changeOrder
+  changeOrder,
 } = actions;
 
 export default reducer;

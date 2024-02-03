@@ -5,6 +5,7 @@ import { FaHome } from 'react-icons/fa';
 import styles from './Home.module.scss';
 import image from './dog.webp';
 import Carousell from '../../components/Carousel';
+import HomeTextCard from '../../components/HomeTextCard';
 
 function Home () {
   return (
@@ -43,12 +44,7 @@ function Home () {
             </div>
           </div>
           <div className={styles.imageContainer}>
-            <img
-              width={300}
-              className={styles.image}
-              src={image}
-              alt='dog image'
-            />
+            <img width={300} className={styles.image} src={image} alt='dog' />
           </div>
         </div>
       </section>
@@ -102,30 +98,30 @@ function Home () {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
               consectetur illum
             </h2>
-            <article className={styles.art}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
+            <HomeTextCard
+              text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
               repudiandae reiciendis laboriosam eos placeat itaque fugiat
               officia, officiis, ducimus ea quae ratione. Laudantium, esse
-              blanditiis. Debitis quia nisi enim eius!
-            </article>
-            <article className={styles.art}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
+              blanditiis. Debitis quia nisi enim eius!'
+            />
+            <HomeTextCard
+              text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
               repudiandae reiciendis laboriosam eos placeat itaque fugiat
               officia, officiis, ducimus ea quae ratione. Laudantium, esse
-              blanditiis. Debitis quia nisi enim eius!
-            </article>
-            <article className={styles.art}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
+              blanditiis. Debitis quia nisi enim eius!'
+            />
+            <HomeTextCard
+              text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
               repudiandae reiciendis laboriosam eos placeat itaque fugiat
               officia, officiis, ducimus ea quae ratione. Laudantium, esse
-              blanditiis. Debitis quia nisi enim eius!
-            </article>
-            <article className={styles.art}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
+              blanditiis. Debitis quia nisi enim eius!'
+            />
+            <HomeTextCard
+              text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
               repudiandae reiciendis laboriosam eos placeat itaque fugiat
               officia, officiis, ducimus ea quae ratione. Laudantium, esse
-              blanditiis. Debitis quia nisi enim eius!
-            </article>
+              blanditiis. Debitis quia nisi enim eius!'
+            />
           </div>
         </div>
       </section>

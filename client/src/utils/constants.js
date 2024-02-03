@@ -68,12 +68,12 @@ export const IS_FOUND_OPTIONS = [
 export const ORDER_OPTIONS = [
   {
     id: '1',
-    value: ['createdAt', 'ASC'],
+    value: 'createdAt,ASC',
     text: 'newest',
   },
   {
     id: '2',
-    value: ['createdAt', 'DESC'],
+    value: 'createdAt,DESC',
     text: 'oldest',
   },
 ];

@@ -25,22 +25,8 @@ module.exports.createPet = async (req, res, next) => {
 };
 
 module.exports.getPets = async (req, res, next) => {
-  const queries = req.query;
-  const page = queries.page || 1;
-  const results = queries.results || 10;
-  const order = queries.order;
-
-  const whereConditions = {};
-
-  Object.keys(queries)
-    .filter(key => key !== 'page' && key !== 'results' && key !== 'order')
-    .forEach(key => {
-      if (queries[key]) {
-        whereConditions[key] = queries[key];
-      }
-    });
-
-  const offset = (page - 1) * results;
+  const { order } = req.query;
+  const { pagination, whereConditions } = req;
 
   try {
     const foundTypes = await Pet.findAll({
@@ -49,8 +35,8 @@ module.exports.getPets = async (req, res, next) => {
         exclude: ['createdAt', 'updatedAt'],
       },
       where: whereConditions,
-      limit: parseInt(results),
-      offset: parseInt(offset),
+      limit: pagination.limit,
+      offset: pagination.offset,
       order: [[order.split(',')]],
     });
 
@@ -90,7 +76,6 @@ module.exports.updatePetById = async (req, res, next) => {
     body,
     params: { id },
   } = req;
-  console.log(id);
 
   try {
     const [updatedPetCount, [updatedPet]] = await Pet.update(body, {
@@ -148,7 +133,7 @@ module.exports.updatePetImage = async (req, res, next) => {
       return next(createHttpError(404, 'Phone not found ):'));
     }
 
-    const preparedPet = _.omit(updatedPet, ['createdAt', 'updatedAt']);
+    const preparedPet = OMIT(updatedPet.get());
 
     res.status(200).send(preparedPet);
   } catch (err) {

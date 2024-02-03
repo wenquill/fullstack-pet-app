@@ -54,7 +54,7 @@ function PetsList ({
     changePetType(value);
     changeCity(value);
     changeIsFound(value);
-    changePetOrder(value);
+    changePetOrder(ORDER_OPTIONS[0].value);
     changePage(1);
   };
 
